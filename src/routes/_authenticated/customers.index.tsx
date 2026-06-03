@@ -73,22 +73,22 @@ function CustomersPage() {
 
   const bulkStatus = useMutation({
     mutationFn: useServerFn(bulkUpdateStatus),
-    onSuccess: (r) => { toast.success(`${r.count} müşteri güncellendi`); invalidate(); },
+    onSuccess: (r: any) => { toast.success(`${r.count} müşteri güncellendi`); invalidate(); },
     onError: (e: any) => toast.error(e.message),
   });
   const bulkAgent = useMutation({
     mutationFn: useServerFn(bulkAssignAgent),
-    onSuccess: (r) => { toast.success(`${r.count} müşteri atandı`); invalidate(); },
+    onSuccess: (r: any) => { toast.success(`${r.count} müşteri atandı`); invalidate(); },
     onError: (e: any) => toast.error(e.message),
   });
   const bulkDel = useMutation({
     mutationFn: useServerFn(bulkDelete),
-    onSuccess: (r) => { toast.success(`${r.count} müşteri silindi`); invalidate(); },
+    onSuccess: (r: any) => { toast.success(`${r.count} müşteri silindi`); invalidate(); },
     onError: (e: any) => toast.error(e.message),
   });
   const upload = useMutation({
     mutationFn: useServerFn(bulkUploadCustomers),
-    onSuccess: (r) => { toast.success(`${r.inserted} müşteri eklendi`); invalidate(); },
+    onSuccess: (r: any) => { toast.success(`${r.inserted} müşteri eklendi`); invalidate(); },
     onError: (e: any) => toast.error(e.message),
   });
 
