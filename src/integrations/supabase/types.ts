@@ -14,16 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      audit_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json | null
+          entity: string
+          entity_id: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          entity: string
+          entity_id?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json | null
+          entity?: string
+          entity_id?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      call_notes: {
+        Row: {
+          agent_id: string | null
+          created_at: string
+          customer_id: string
+          id: string
+          note: string | null
+          outcome: Database["public"]["Enums"]["call_outcome"]
+        }
+        Insert: {
+          agent_id?: string | null
+          created_at?: string
+          customer_id: string
+          id?: string
+          note?: string | null
+          outcome: Database["public"]["Enums"]["call_outcome"]
+        }
+        Update: {
+          agent_id?: string | null
+          created_at?: string
+          customer_id?: string
+          id?: string
+          note?: string | null
+          outcome?: Database["public"]["Enums"]["call_outcome"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "call_notes_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      customers: {
+        Row: {
+          assigned_agent: string | null
+          balance: number
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          last_call_at: string | null
+          notes: string | null
+          phone: string | null
+          status: Database["public"]["Enums"]["customer_status"]
+          updated_at: string
+        }
+        Insert: {
+          assigned_agent?: string | null
+          balance?: number
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          last_call_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["customer_status"]
+          updated_at?: string
+        }
+        Update: {
+          assigned_agent?: string | null
+          balance?: number
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          last_call_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          status?: Database["public"]["Enums"]["customer_status"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "agent"
+      call_outcome:
+        | "interested"
+        | "uninterested"
+        | "potential"
+        | "callback"
+        | "will_return"
+      customer_status:
+        | "new"
+        | "interested"
+        | "uninterested"
+        | "potential"
+        | "callback"
+        | "converted"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +320,23 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "agent"],
+      call_outcome: [
+        "interested",
+        "uninterested",
+        "potential",
+        "callback",
+        "will_return",
+      ],
+      customer_status: [
+        "new",
+        "interested",
+        "uninterested",
+        "potential",
+        "callback",
+        "converted",
+      ],
+    },
   },
 } as const
