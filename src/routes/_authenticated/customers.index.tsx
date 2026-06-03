@@ -246,13 +246,6 @@ function CustomersPage() {
             </tbody>
           </table>
         </div>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
 
         {/* Pagination */}
         <div className="flex items-center justify-between p-3 border-t border-border/40 text-sm">
