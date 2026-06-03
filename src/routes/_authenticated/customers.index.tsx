@@ -235,17 +235,17 @@ function CustomersPage() {
                         <FileText className="w-4 h-4 text-gold" />
                       </button>
                       {r.phone && (
-                        <button
-                          onClick={async () => {
-                            const fn = useServerFn(dialCustomer);
-                            // simple call
-                            const res = await fetch("");
-                          }}
-                          className="p-2 rounded hover:bg-primary/20 transition-colors" title="Ara"
-                        >
-                          <a href={`sip:${r.phone}`}><Phone className="w-4 h-4 text-gold" /></a>
-                        </button>
+                        <a href={`sip:${r.phone}`} className="p-2 rounded hover:bg-primary/20 transition-colors" title="Ara">
+                          <Phone className="w-4 h-4 text-gold" />
+                        </a>
                       )}
+                    </div>
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
                     </div>
                   </td>
                 </motion.tr>
