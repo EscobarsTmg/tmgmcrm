@@ -64,7 +64,7 @@ function CustomerDetail() {
         ) : (
           <div className="relative pl-6">
             <div className="absolute left-2 top-2 bottom-2 w-px bg-gradient-to-b from-primary/60 via-primary/20 to-transparent" />
-            {data.notes.map((n, i) => (
+            {data.notes.map((n: any, i: number) => (
               <motion.div
                 key={n.id}
                 initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}
